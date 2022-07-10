@@ -123,17 +123,17 @@ The primary reason for this wrapper is the 'fuse' functionality for revoking per
 
  1. Each name has 'fuses' and an 'expiration'. Fuses are a bitmask, and a fuse is burned when it is set to 1.
  2. Fuses cannot be set ('burned') unless the expiration timestamp is in the future.
- 3. When the expiration timestamp passes, fuses are automatically cleared.
- 4. Once a fuse is burned, it cannot be unburned until the expiration timestamp is reached.
- 5. The expiration timestamp can only ever be increased, not decreased.
- 6. A .eth 2LD's (eg, foo.eth) expiration timestamp cannot be greater than the timestamp at which the name expires in the ENS registry.
- 7. For any other domain, its expiration timestamp cannot be greater than its parents' timestamp.
- 8. A .eth 2LD's expiration timestamp can only be increased by the owner of the name, or an authorised caller.
- 9. For any other domain, the expiration timestamp can only be increased by the owner of the parent name, or an authorised caller.
- 10. Fuses that can be burned are `CANNOT_UNWRAP`, `CANNOT_BURN_FUSES`, `CANNOT_TRANSFER`, `CANNOT_SET_RESOLVER`, `CANNOT_SET_TTL`, `CANNOT_CREATE_SUBDOMAIN`, and `PARENT_CANNOT_CONTROL`.
+ 3. Fuses that can be burned are `CANNOT_UNWRAP`, `CANNOT_BURN_FUSES`, `CANNOT_TRANSFER`, `CANNOT_SET_RESOLVER`, `CANNOT_SET_TTL`, `CANNOT_CREATE_SUBDOMAIN`, and `PARENT_CANNOT_CONTROL`.
+ 4. When the expiration timestamp passes, fuses are automatically cleared.
+ 5. Once a fuse is burned, it cannot be unburned until the expiration timestamp is reached.
+ 6. While the expiration timestamp is in the future, and the `CANNOT_UNWRAP` fuse is burned, the expiration timestamp can only ever be increased, not decreased.
+ 7. A .eth 2LD's (eg, foo.eth) expiration timestamp cannot be greater than the timestamp at which the name expires in the .eth registrar.
+ 8. For any other domain, its expiration timestamp cannot be greater than its parents' timestamp.
+ 9. A .eth 2LD's expiration timestamp can only be increased by the owner of the name, or an authorised caller.
+ 10. For any other domain, the expiration timestamp can only be increased by the owner of the parent name, or an authorised caller.
  12. Unless `CANNOT_UNWRAP` is burned, the only fuse that can be burned is `PARENT_CANNOT_CONTROL`.
  11. Unless `CANNOT_BURN_FUSES` is burned, the owner of a name can burn any fuse except `PARENT_CANNOT_CONTROL`.
- 12. Unless a subdomain's `PARENT_CANNOT_CONTROL` or `CANNOT_BURN_FUSES` is burned, the owner of a name can burn any fuse on that subdomain, including `PARENT_CANNOT_CONTROL` and `CANNOT_BURN_FUSES`.
+ 12. Unless a subdomain's `PARENT_CANNOT_CONTROL` fuse is burned, the owner of the parent name can burn any fuse on that subdomain, including `PARENT_CANNOT_CONTROL`.
  13. There should be no sequence of operations that can bypass the fuse checks on a name before the expiration timestamp.
  14. Calling `getData` on a name and checking that a. The expiration timestamp is in the future, and b. The required fuse is burned, should be sufficient to establish that that operation is not possible on that name through any sequence of operations prior to the expiration timestamp.
 

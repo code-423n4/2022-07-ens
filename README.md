@@ -29,10 +29,12 @@ yarn test
 ## contracts/dnssec-oracle
 ### [BytesUtils.sol](contracts/dnssec-oracle/BytesUtils.sol)
 **SLOC**: 164
+
 Contains assorted utility functions for manipulating byte strings.
 
 ### [DNSSECImpl.sol](contracts/dnssec-oracle/DNSSECImpl.sol)
 **SLOC**: 183
+
 An implementation of a DNSSEC client as per RFC4034 & RFC4035. `verifyRRSet` should return the RRData for the last record in the array of signed RRSets passed in, iff the set of records passes DNSSEC validation from the root. If validation fails, it should revert.
 
 Dependencies:
@@ -43,6 +45,7 @@ Dependencies:
 
 ### [RRUtils.sol](contracts/dnssec-oracle/RRUtils.sol)
 **SLOC**: 215
+
 Utility functions for reading DNS RRSets.
 
 Dependencies:
@@ -51,11 +54,13 @@ Dependencies:
 
 ### [SHA1.sol](contracts/dnssec-oracle/SHA1.sol)
 **SLOC**: 82
+
 A solidity/yul implementation of SHA1.
 
 ## contracts/ethregistrar
 ### [ETHRegistrarController.sol](contracts/ethregistrar/ETHRegistrarController.sol)
 **SLOC**: 240
+
 The ETHRegistrarController governs how ENS names are registered and renewed. This contract has been modified since the deployed version to add:
  - Support for the Name Wrapper.
  - Support for setting arbitary records at registration time.
@@ -74,6 +79,7 @@ Dependencies:
 ## contracts/registry
 ### [ReverseRegistrar.sol](contracts/registry/ReverseRegistrar.sol)
 **SLOC**: 112
+
 Allows users to register and update reverse records (primary ENS names). This contract has been modified since the deployed version with a number of improvements:
  - Support for the NameWrapper.
  - Support for arbitrary resolver contracts.
@@ -88,10 +94,12 @@ Dependencies:`
 ## contracts/wrapper
 ### [BytesUtil.sol](contracts/wrapper/BytesUtil.sol)
 **SLOC**: 27
+
 Contains assorted utility functions for manipulating byte strings.
 
 ### [ERC1155Fuse.sol](contracts/wrapper/ERC1155Fuse.sol)
 **SLOC**: 279
+
 An implementation of ERC1155 that only supports 1 token per token type, with the owner, fuse/flag information, and an expiration time all packed into a single storage slot for gas-efficiency. Should conform to ERC1155, with the addition of `ownerOf`.
 
 Dependencies:
@@ -103,6 +111,7 @@ Dependencies:
 
 ### [NameWrapper.sol](contracts/wrapper/NameWrapper.sol)
 **SLOC**: 657
+
 A contract that wraps ENS names, providing additional functionality:
  - Makes all names at any level valid ERC1155 NFTs.
  - Stores name preimages (plaintext names) onchain in an efficient format so they can be processed if needed.

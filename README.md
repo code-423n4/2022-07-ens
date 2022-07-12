@@ -7,6 +7,14 @@
 - Starts July 12, 2022 20:00 UTC
 - Ends July 19, 2022 20:00 UTC
 
+# About ENS
+
+ENS is a decentralised naming service built on top of Ethereum, and designed to resolve a wide array of resources including blockchain addresses, decentralised content, and user profile information.
+
+Developer documentation can be found [here](https://docs.ens.domains/).
+
+Information on existing ENS deployments can be found [here](https://docs.ens.domains/ens-deployments).
+
 # Developer guide
 
 ## Setup
@@ -25,6 +33,11 @@ yarn test
 
 # Contracts
 **Note: Not all contracts in this repository are in-scope for this audit! We have included contracts from the original ens-contracts repo that are dependencies of in-scope contracts here for the convenience of auditors. Only the contracts listed below are in-scope.**
+
+This audit is intended to cover several new and upgraded components of the ENS system:
+ - The new Name Wrapper contract, which permits wrapping ENS names to provide significant additional functionality, including easy trustless subdomain issuance.
+ - A rewritten DNSSEC oracle, which facilitates trustless onchain verification of DNSSEC proofs of DNS records.
+ - Upgrades to the ETH registrar controller and reverse registrar to add support for the wrapper, as well as other quality-of-life improvements.
 
 ## contracts/dnssec-oracle
 ### [BytesUtils.sol](contracts/dnssec-oracle/BytesUtils.sol)
@@ -57,6 +70,26 @@ Dependencies:
 
 A solidity/yul implementation of SHA1.
 
+### [Owned.sol](contracts/dnssec-oracle/Owned.sol)
+**SLOC**: 21
+
+A simple ownable/owned interface.
+
+### [DNSSEC.sol](contracts/dnssec-oracle/DNSSEC.sol)
+**SLOC**: 11
+
+A public interface for `DNSSECImpl.sol`.
+
+## [algorithms/Algorithm.sol](contracts/dnssec-oracle/algorithms/Algorithm.sol)
+**SLOC**: 3
+
+Public interface for DNSSEC (public key) algorithim implementations.
+
+## [digests/Digests.sol](contracts/dnssec-oracle/digests/Digest.sol)
+**SLOC**: 3
+
+Public interface for DNSSEC digest (hash function) implementations.
+
 ## contracts/ethregistrar
 ### [ETHRegistrarController.sol](contracts/ethregistrar/ETHRegistrarController.sol)
 **SLOC**: 240
@@ -76,6 +109,21 @@ Dependencies:
  - @openzeppelin/contracts/utils/introspection/IERC165.sol
  - @openzeppelin/contracts/utils/Address.sol
 
+### [IETHRegistrarController.sol](contracts/ethregistrar/IETHRegistrarController.sol)
+**SLOC**: 4
+
+Public interface for `ETHRegistrarController`.
+
+### [StringUtils.sol](contracts/ethregistrar/StringUtils.sol)
+**SLOC**: 25
+
+String manipulation functions used by `ETHRegistrarController.sol`.
+
+### [IBaseRegistrar.sol](contracts/ethregistrar/IBaseRegistrar.sol)
+**SLOC**: 18
+
+Interface for the `BaseRegistrarImplementation` (not in scope).
+
 ## contracts/registry
 ### [ReverseRegistrar.sol](contracts/registry/ReverseRegistrar.sol)
 **SLOC**: 112
@@ -90,6 +138,11 @@ Dependencies:`
  - ENS.sol
  - ../root/Controllable.sol
  - @openzeppelin/contracts/access/Ownable.sol
+
+### [IReverseRegistrar.sol](contracts/registry/IReverseRegistrar.sol)
+**SLOC**: 3
+
+Public interface for `ReverseRegistrar.sol`.
 
 ## contracts/wrapper
 ### [BytesUtil.sol](contracts/wrapper/BytesUtil.sol)
@@ -145,3 +198,35 @@ The primary reason for this wrapper is the 'fuse' functionality for revoking per
  - ../ethregistrar/IBaseRegistrar.sol
  - @openzeppelin/contracts/token/ERC721/IERC721Receiver.sol
  - @openzeppelin/contracts/access/Ownable.sol
+
+### [INameWrapper.sol](contracts/wrapper/INameWrapper.sol)
+**SLOC**: 24
+
+Public interface for `NameWrapper.sol`.
+
+### [Controllable.sol](contracts/wrapper/Controllable.sol)
+**SLOC**: 14
+
+Mixin for a contract that can have controllers - other accounts that have access to privileged functions.
+
+### [IMetadataService.sol](contracts/wrapper/IMetadataService.sol)
+**SLOC**: 3
+
+Interface for a metadata service - a contract that returns token metadata for a wrapped token.
+
+*** [INameWrapperUpgrade.sol](contracts/wrapper/INameWrapperUpgrade.sol)
+**SLOC**: 3
+
+Interface for an upgrade target for the name wrapper - a new version of the wrapper.
+
+## contracts/registry
+### [ENS.sol](contracts/registry/ENS.sol)
+**SLOC**: 12
+
+Interface for the ENS registry contract.
+
+## contracts/resolvers
+### [Resolver.sol](contracts/resolvers/Resolver.sol)
+**SLOC**: 29
+
+Generic interface for ENS resolver contracts.

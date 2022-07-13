@@ -40,12 +40,12 @@ This audit is intended to cover several new and upgraded components of the ENS s
  - Upgrades to the ETH registrar controller and reverse registrar to add support for the wrapper, as well as other quality-of-life improvements.
 
 ## contracts/dnssec-oracle
-### [BytesUtils.sol](contracts/dnssec-oracle/BytesUtils.sol)
+### [BytesUtils.sol](https://github.com/code-423n4/2022-07-ens/tree/main/contracts/dnssec-oracle/BytesUtils.sol)
 **SLOC**: 164
 
 Contains assorted utility functions for manipulating byte strings.
 
-### [DNSSECImpl.sol](contracts/dnssec-oracle/DNSSECImpl.sol)
+### [DNSSECImpl.sol](https://github.com/code-423n4/2022-07-ens/tree/main/contracts/dnssec-oracle/DNSSECImpl.sol)
 **SLOC**: 183
 
 An implementation of a DNSSEC client as per RFC4034 & RFC4035. `verifyRRSet` should return the RRData for the last record in the array of signed RRSets passed in, iff the set of records passes DNSSEC validation from the root. If validation fails, it should revert.
@@ -56,7 +56,7 @@ Dependencies:
  - RRUtils.sol
  - @ensdomains/buffer/contracts/Buffer.sol
 
-### [RRUtils.sol](contracts/dnssec-oracle/RRUtils.sol)
+### [RRUtils.sol](https://github.com/code-423n4/2022-07-ens/tree/main/contracts/dnssec-oracle/RRUtils.sol)
 **SLOC**: 215
 
 Utility functions for reading DNS RRSets.
@@ -65,33 +65,33 @@ Dependencies:
  - BytesUtils.sol
  - @ensdomains/buffer/contracts/Buffer.sol
 
-### [SHA1.sol](contracts/dnssec-oracle/SHA1.sol)
+### [SHA1.sol](https://github.com/code-423n4/2022-07-ens/tree/main/contracts/dnssec-oracle/SHA1.sol)
 **SLOC**: 82
 
 A solidity/yul implementation of SHA1.
 
-### [Owned.sol](contracts/dnssec-oracle/Owned.sol)
+### [Owned.sol](https://github.com/code-423n4/2022-07-ens/tree/main/contracts/dnssec-oracle/Owned.sol)
 **SLOC**: 21
 
 A simple ownable/owned interface.
 
-### [DNSSEC.sol](contracts/dnssec-oracle/DNSSEC.sol)
+### [DNSSEC.sol](https://github.com/code-423n4/2022-07-ens/tree/main/contracts/dnssec-oracle/DNSSEC.sol)
 **SLOC**: 11
 
 A public interface for `DNSSECImpl.sol`.
 
-## [algorithms/Algorithm.sol](contracts/dnssec-oracle/algorithms/Algorithm.sol)
+## [algorithms/Algorithm.sol](https://github.com/code-423n4/2022-07-ens/tree/main/contracts/dnssec-oracle/algorithms/Algorithm.sol)
 **SLOC**: 3
 
 Public interface for DNSSEC (public key) algorithim implementations.
 
-## [digests/Digests.sol](contracts/dnssec-oracle/digests/Digest.sol)
+## [digests/Digests.sol](https://github.com/code-423n4/2022-07-ens/tree/main/contracts/dnssec-oracle/digests/Digest.sol)
 **SLOC**: 3
 
 Public interface for DNSSEC digest (hash function) implementations.
 
 ## contracts/ethregistrar
-### [ETHRegistrarController.sol](contracts/ethregistrar/ETHRegistrarController.sol)
+### [ETHRegistrarController.sol](https://github.com/code-423n4/2022-07-ens/tree/main/contracts/ethregistrar/ETHRegistrarController.sol)
 **SLOC**: 240
 
 The ETHRegistrarController governs how ENS names are registered and renewed. This contract has been modified since the deployed version to add:
@@ -109,23 +109,23 @@ Dependencies:
  - @openzeppelin/contracts/utils/introspection/IERC165.sol
  - @openzeppelin/contracts/utils/Address.sol
 
-### [IETHRegistrarController.sol](contracts/ethregistrar/IETHRegistrarController.sol)
+### [IETHRegistrarController.sol](https://github.com/code-423n4/2022-07-ens/tree/main/contracts/ethregistrar/IETHRegistrarController.sol)
 **SLOC**: 4
 
 Public interface for `ETHRegistrarController`.
 
-### [StringUtils.sol](contracts/ethregistrar/StringUtils.sol)
+### [StringUtils.sol](https://github.com/code-423n4/2022-07-ens/tree/main/contracts/ethregistrar/StringUtils.sol)
 **SLOC**: 25
 
 String manipulation functions used by `ETHRegistrarController.sol`.
 
-### [IBaseRegistrar.sol](contracts/ethregistrar/IBaseRegistrar.sol)
+### [IBaseRegistrar.sol](https://github.com/code-423n4/2022-07-ens/tree/main/contracts/ethregistrar/IBaseRegistrar.sol)
 **SLOC**: 18
 
 Interface for the `BaseRegistrarImplementation` (not in scope).
 
 ## contracts/registry
-### [ReverseRegistrar.sol](contracts/registry/ReverseRegistrar.sol)
+### [ReverseRegistrar.sol](https://github.com/code-423n4/2022-07-ens/tree/main/contracts/registry/ReverseRegistrar.sol)
 **SLOC**: 112
 
 Allows users to register and update reverse records (primary ENS names). This contract has been modified since the deployed version with a number of improvements:
@@ -139,18 +139,18 @@ Dependencies:`
  - ../root/Controllable.sol
  - @openzeppelin/contracts/access/Ownable.sol
 
-### [IReverseRegistrar.sol](contracts/registry/IReverseRegistrar.sol)
+### [IReverseRegistrar.sol](https://github.com/code-423n4/2022-07-ens/tree/main/contracts/registry/IReverseRegistrar.sol)
 **SLOC**: 3
 
 Public interface for `ReverseRegistrar.sol`.
 
 ## contracts/wrapper
-### [BytesUtil.sol](contracts/wrapper/BytesUtil.sol)
+### [BytesUtil.sol](https://github.com/code-423n4/2022-07-ens/tree/main/contracts/wrapper/BytesUtil.sol)
 **SLOC**: 27
 
 Contains assorted utility functions for manipulating byte strings.
 
-### [ERC1155Fuse.sol](contracts/wrapper/ERC1155Fuse.sol)
+### [ERC1155Fuse.sol](https://github.com/code-423n4/2022-07-ens/tree/main/contracts/wrapper/ERC1155Fuse.sol)
 **SLOC**: 279
 
 An implementation of ERC1155 that only supports 1 token per token type, with the owner, fuse/flag information, and an expiration time all packed into a single storage slot for gas-efficiency. Should conform to ERC1155, with the addition of `ownerOf`.
@@ -162,7 +162,7 @@ Dependencies:
  - @openzeppelin/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol
  - @openzeppelin/contracts/utils/Address.sol
 
-### [NameWrapper.sol](contracts/wrapper/NameWrapper.sol)
+### [NameWrapper.sol](https://github.com/code-423n4/2022-07-ens/tree/main/contracts/wrapper/NameWrapper.sol)
 **SLOC**: 657
 
 A contract that wraps ENS names, providing additional functionality:
@@ -199,34 +199,34 @@ The primary reason for this wrapper is the 'fuse' functionality for revoking per
  - @openzeppelin/contracts/token/ERC721/IERC721Receiver.sol
  - @openzeppelin/contracts/access/Ownable.sol
 
-### [INameWrapper.sol](contracts/wrapper/INameWrapper.sol)
+### [INameWrapper.sol](https://github.com/code-423n4/2022-07-ens/tree/main/contracts/wrapper/INameWrapper.sol)
 **SLOC**: 24
 
 Public interface for `NameWrapper.sol`.
 
-### [Controllable.sol](contracts/wrapper/Controllable.sol)
+### [Controllable.sol](https://github.com/code-423n4/2022-07-ens/tree/main/contracts/wrapper/Controllable.sol)
 **SLOC**: 14
 
 Mixin for a contract that can have controllers - other accounts that have access to privileged functions.
 
-### [IMetadataService.sol](contracts/wrapper/IMetadataService.sol)
+### [IMetadataService.sol](https://github.com/code-423n4/2022-07-ens/tree/main/contracts/wrapper/IMetadataService.sol)
 **SLOC**: 3
 
 Interface for a metadata service - a contract that returns token metadata for a wrapped token.
 
-*** [INameWrapperUpgrade.sol](contracts/wrapper/INameWrapperUpgrade.sol)
+*** [INameWrapperUpgrade.sol](https://github.com/code-423n4/2022-07-ens/tree/main/contracts/wrapper/INameWrapperUpgrade.sol)
 **SLOC**: 3
 
 Interface for an upgrade target for the name wrapper - a new version of the wrapper.
 
 ## contracts/registry
-### [ENS.sol](contracts/registry/ENS.sol)
+### [ENS.sol](https://github.com/code-423n4/2022-07-ens/tree/main/contracts/registry/ENS.sol)
 **SLOC**: 12
 
 Interface for the ENS registry contract.
 
 ## contracts/resolvers
-### [Resolver.sol](contracts/resolvers/Resolver.sol)
+### [Resolver.sol](https://github.com/code-423n4/2022-07-ens/tree/main/contracts/resolvers/Resolver.sol)
 **SLOC**: 29
 
 Generic interface for ENS resolver contracts.

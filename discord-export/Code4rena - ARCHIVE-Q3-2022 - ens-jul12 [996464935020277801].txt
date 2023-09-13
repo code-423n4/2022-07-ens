@@ -1,0 +1,757 @@
+==============================================================
+Guild: Code4rena
+Channel: ARCHIVE-Q3-2022 / ens-jul12
+==============================================================
+
+[07/12/2022 5:34 PM] kartoonjoy
+👋 Hello and welcome to the contest channel for the $75K USDC **ENS** contest!
+
+📆 Contest opens 07/12/2022 8:00 PM (20:00 UTC) and runs through 07/19/2022 8:00 PM (20:00 UTC) (7 days).
+
+Please give a warm welcome to the ENS team, particularly @nickjohnson, @makoto, @Jeff Lau, @Luc, who will be available for questions either here in the channel or via DM.
+
+We'll be posting relevant links, documentation, etc. here, so if you intend to participate in this contest, consider enabling notifications for this channel. 🐺 ⏰
+
+Contest Page: https://code4rena.com/contests/2022-07-ens-contest
+
+{Embed}
+https://code4rena.com/contests/2022-07-ens-contest
+Code4rena ENS contest
+$75,000 USDC
+12 July 2022—19 July 2022
+Code4rena - ARCHIVE-Q3-2022 - ens-jul12 [996464935020277801].txt_Files/C4-banner-7C19B.png
+
+
+[07/12/2022 11:12 PM] JohnSmith#1623
+
+
+{Attachments}
+Code4rena - ARCHIVE-Q3-2022 - ens-jul12 [996464935020277801].txt_Files/6ml7f7-3F36D.jpg
+
+
+[07/12/2022 11:17 PM] alextheentreprenerd
+Just use the links from the Readme: https://github.com/code-423n4/2022-07-ens
+
+{Reactions}
+❤️ (2) 
+
+[07/12/2022 11:18 PM] cloudellie
+If you click through to the contest repo, the links should work: https://github.com/code-423n4/2022-07-ens
+
+/cc @JohnSmith
+
+
+[07/12/2022 11:18 PM] cloudellie
+(or just listen to Alex, lol)
+
+
+[07/12/2022 11:30 PM] JohnSmith#1623
+I mean no one has problem in finding contracts, however it can be confusing for new people. Path to contracts is relative 
+`### [DNSSECImpl.sol](contracts/dnssec-oracle/DNSSECImpl.sol)`, that is why we have what we have.
+
+
+[07/13/2022 12:44 AM] kartoonjoy
+This should be resolved now.
+
+{Reactions}
+chefskiss (2) thankyou 
+
+[07/13/2022 8:56 AM] nickjohnson
+Hi folks. Happy to answer any questions you have about the code!
+
+
+[07/13/2022 8:56 AM] nickjohnson
+@makoto @Luc and @Jeff Lau from the ENS team are also here.
+
+
+[07/13/2022 9:50 AM] lucemans
+👋 Whatssup!
+
+
+[07/13/2022 10:18 AM] Franfran#5067
+Hey frens
+
+
+[07/13/2022 7:47 PM] danb#6193
+What does this fucntion do?
+
+{Attachments}
+Code4rena - ARCHIVE-Q3-2022 - ens-jul12 [996464935020277801].txt_Files/unknown-33F60.png
+
+
+[07/13/2022 7:48 PM] danb#6193
+@nickjohnson
+
+
+[07/13/2022 8:17 PM] Franfran#5067
+I think that it's sufficiently explained in the natspec comments
+
+
+[07/13/2022 8:18 PM] danb#6193
+I didn't understand it either
+
+
+[07/13/2022 8:19 PM] Franfran#5067
+Length is not the same as amount of bytes because for instance some UTF8 characters will need more than 8 bits
+
+
+[07/13/2022 8:24 PM] Franfran#5067
+https://www.charset.org/utf-8
+
+{Embed}
+https://www.charset.org/utf-8
+
+
+[07/13/2022 8:24 PM] Franfran#5067
+Like if the letter decimal is >= 256, the letter will need to be encoded in more than 1 bytes, 2 bytes or more
+
+
+[07/13/2022 8:24 PM] Franfran#5067
+Please correct me if I'm wrong
+
+
+[07/13/2022 8:25 PM] danb#6193
+Thank you, i didn't know the names are encoded in utf8
+
+
+[07/13/2022 8:25 PM] Franfran#5067
+I mean the best is always to ask the team, at least they are correct
+
+
+[07/13/2022 9:39 PM] nofig.eth
+Hi there, I'm reading the NameWrapper.sol contract. I've seen multiple instances of ETH2LD. Can anyone give me a tip on that? @nickjohnson
+
+
+[07/13/2022 10:16 PM] nofig.eth
+Nevermind, second level domain
+
+
+[07/14/2022 6:20 AM] 100proof
+@nickjohnson Both @makoto and @Jeff Lau don't have non-friend DMs enabled so we can't contact them.
+
+
+[07/14/2022 7:33 AM] JohnSmith#1623
+Looking at tests, this function works with hex strings like this
+`require(hex'0361626300'.nameLength(0) == 5, "nameLength('abc.') == 5");`
+Can't find yet where such strings are created.
+'abc' to hex will be '616263', but where  are other peaces inserted?
+
+
+[07/14/2022 7:35 AM] nickjohnson
+Names used by the wrapper are encoded in DNS wire format, which consists of a 1 byte length, followed by that many bytes of label
+
+
+[07/14/2022 7:36 AM] nickjohnson
+So 'test.xyz' is 0x04 + test + 0x03 + xyz + 0x00
+
+
+[07/14/2022 8:09 AM] JohnSmith#1623
+makes sense, but where do we get such encoded strings from?
+
+
+[07/14/2022 8:10 AM] nickjohnson
+For testing? See the test function here: https://github.com/code-423n4/2022-07-ens/blob/main/test/utils/dnsutils.js#L8
+
+{Embed}
+https://github.com/code-423n4/2022-07-ens/blob/main/test/utils/dnsutils.js
+2022-07-ens/dnsutils.js at main · code-423n4/2022-07-ens
+Contribute to code-423n4/2022-07-ens development by creating an account on GitHub.
+Code4rena - ARCHIVE-Q3-2022 - ens-jul12 [996464935020277801].txt_Files/97ce107b-90e6-49b8-b893-ad2ce77d05d2-0F162
+
+{Reactions}
+👍 
+
+[07/14/2022 9:57 AM] Franfran#5067
+How would you prioritize the order of auditing, is there any points of concerns in the files ?
+
+
+[07/14/2022 9:59 AM] nickjohnson
+The name wrapper has been audited before, but extensively changed since then, and some of the permission model is quite complex - so it's worth a close look.
+
+
+[07/14/2022 9:59 AM] nickjohnson
+The DNSSEC code is complex and has not been audited before, so also worth a close look.
+
+
+[07/14/2022 10:00 AM] Franfran#5067
+Thanks
+
+
+[07/14/2022 8:28 PM] 100proof
+@nickjohnson do you have links to the previous audit reports ?
+
+
+[07/14/2022 9:28 PM] tofunmi
+Permission model in the wrapper right
+
+
+[07/15/2022 1:01 PM] nickjohnson
+Correct
+
+
+[07/15/2022 1:01 PM] nickjohnson
+I don't believe we published them anywhere, but the wrapper has changed enough since then that it may not be that useful anyway
+
+
+[07/15/2022 7:31 PM] izhuer
+Hi, may I know any sponsor available for DM?
+
+{Reactions}
+➕ (2) 🧐 
+
+[07/16/2022 1:17 AM] 100proof
+Can anyone tell me how a registrar would get created for a sub-domain?
+
+
+[07/16/2022 1:17 AM] 100proof
+What's the process that would get followed?
+
+
+[07/16/2022 4:32 AM] jeff_lau
+You would create a contract that calls `wrapper.setSubnodeOwner` and approve that contract as owner of the name
+
+
+[07/16/2022 6:54 AM] 100proof
+Nice. So anyone could become their own registrar by buying a domain and then become the registrar for the sub-domains, right?
+
+{Reactions}
+🧐 
+
+[07/16/2022 3:03 PM] premm.eth
+To be clear I think the word is "operator" not "owner" ?
+
+
+[07/16/2022 11:30 PM] 100proof
+So, now I'm a little confused and I wonder if one of the sponsors could help me out.
+
+
+[07/16/2022 11:32 PM] 100proof
+It's clear that there is a lot of functionality in `NameWrapper` for handling sub-domains, sub-sub-domains and so on, for as many levels deep as you might require. However, the `registrar` in the `NameWrapper` contract is fixed/immutable. So, if a person wanted to become their own registrar of, say, `blah.eth` then they couldn't really use `NameWrapper` anymore because they'd want to use their own `registrar` contract, right? Is this correct? Is the `NameWrapper` contract just for use with `.eth` and direct sub-domains? If so, why does it have functionality for sub-sub-domains etc?
+
+
+[07/17/2022 12:28 AM] JM217#0899
+`ssee.fried.eth` like thing
+
+
+[07/17/2022 12:28 AM] JM217#0899
+I wonder if someone needs to be a `registrar` of his domain
+
+
+[07/17/2022 1:02 AM] premm.eth
+If you own a name, you can create as many subdomains as you like, if you own those subdomains, then you can make sub subdomains. If the name is wrapped in the NameWrapper then those subdomains are ERC-1155 NFTs. This is the main function of the NameWrapper. If however, you don't want to register one sub at a time, using your externally owned account (EOA), that's where a registrar comes in. A registrar is a smart contract that you give the same permissions to as your EOA, think of it like a box office for a theater, it only does what the owner wants. 
+
+If you want it to create subdomains and issue them to the public, for a fee for example, then you can create a contact that does that. I think the confusion lies in the fact that .eth is actually a independent domain, so it has an owner, and that owner happens to be a registrar, which is also a wrapper of .eth subs, i.e., 2LD domains, e.g., vitalik.eth. The composable nature of ENS names, means that things can be configured in different ways, but there are base structures, e.g. wrappers, registrars, and controllers, and these things all can come together in different ways. 
+
+If you tell me your application I can tell you how it could be set up.
+
+
+[07/17/2022 1:52 AM] 100proof
+I'm interested in how reclaiming works. Say someone registers `defi.eth` and then the owner of that goes on to sell the sub-domain `curve.defi.eth`.  I'm aware that, technically, the owner of `defi.eth` can take back `curve.defi.eth` from them.  (I also realise that the `PARENT_CANNOT_CONTROL` fuse functionality in `NameWrapper` is meant to prevent this). But how is this done in practice? What contract calls would need to be performed for `defi.eth` to take back `curve.defi.eth`?
+
+
+[07/17/2022 2:24 AM] premm.eth
+The first two fuses that need to be set on subnames in order to set other fuses are PARENT_CANNOT_CONTROL and CANNOT_UNWRAP. This effectively protects the subname owner from the parent taking the name back, as long as the expiry of the fuses of the subname is not expired. 
+
+If these fuses are not set, then the parent name owner, e.g., defi.eth, can call setSubnodeOwner, or setSubnodeRecord to set the owner to himself, and then call unwrap, to fully take back and unwrap the name.
+
+
+[07/17/2022 2:25 AM] 100proof
+But this is only if you choose to use the `NameWrapper` contract. I'm trying to get my head around the scenario where person A buys `defi.eth` and then chooses NOT to uses this infrastructure. They're allowed to, right?
+
+
+[07/17/2022 2:32 AM] premm.eth
+They can do whatever they want.
+
+
+[07/17/2022 2:34 AM] 100proof
+Great. So, now they sell `curve.defi.eth`. Then they choose to take it back. How exactly do they do this? By doing appropriate calls to the ENS registrar?
+
+
+[07/17/2022 2:34 AM] izhuer
+I guess, in `ETHRegistrarController.sol`, it will use `nameWrapper.registerAndWrapETH2LD` by default?
+
+
+[07/17/2022 2:34 AM] 100proof
+@izhuer were you answering my question?
+
+
+[07/17/2022 2:34 AM] izhuer
+since the controller is the  user interface, I suspect
+
+
+[07/17/2022 2:35 AM] izhuer
+I think so? Lol, I mean, seems that users are forced to use `NameWrapper`?
+
+
+[07/17/2022 2:35 AM] 100proof
+We've been told this is not the case above.
+
+
+[07/17/2022 2:36 AM] izhuer
+Lol, I see.
+
+
+[07/17/2022 2:36 AM] 100proof
+It seems to be up to you whether you want to use it or not.
+
+
+[07/17/2022 2:36 AM] izhuer
+I did not check the previous channel, my bad
+
+
+[07/17/2022 2:37 AM] izhuer
+hope some sponsor could show up somehow, lol. It seems that sponsors are not in the same time zone with me, Lol
+
+
+[07/17/2022 2:37 AM] 100proof
+Yeah, I think I'll have to wait until the sponsors wake up.
+
+
+[07/17/2022 2:42 AM] premm.eth
+The new ETHRegistrarController.sol automatically wraps the name, but the fuses which are set are up to the user. If the user sets no fuses, then the user can unwrap.
+
+I would assume that defi.eth is already registered, therefore not wrapped.
+
+
+[07/17/2022 2:44 AM] 100proof
+Yes, in my scenario it is not wrapped, and then they become their own registrar, perhaps even using their own smart contract, and then they sell `curve.defi.eth` to someone. Then they decide to be malicious and take back the domain. Apparently they could do this... but how?
+
+
+[07/17/2022 2:57 AM] premm.eth
+If PARENT_CANNOT_CONTROL and CANNOT_UNWRAP are burnt then they cannot take it back unless the fuses expire. The way to make it totally locked down is to register the parent name for 100 years, and then set the expiry of the fuses to 100 years as well.
+
+
+[07/17/2022 2:57 AM] 100proof
+But I'm not talking about using `NameWrapper`
+
+
+[07/17/2022 2:58 AM] 100proof
+I'm referring to this scenario: https://docs.ens.domains/contract-developer-guide/writing-a-registrar
+
+
+[07/17/2022 2:58 AM] premm.eth
+The way it currently is, there is no way to protect the subname owner, without creating custom contracts
+
+
+[07/17/2022 2:59 AM] 100proof
+Great. I picked that up. However, I want to know _how_ the domain holder (e.g. `defi.eth` takes the sub domain (e.g. `curve.defi.eth`) off the person they sold it to.
+
+
+[07/17/2022 2:59 AM] 100proof
+Is this by calling the `ENSRegistry` contract or similar?
+
+
+[07/17/2022 3:00 AM] 100proof
+It can't have anything to do with `NameWrapper` or `BaseRegistrarImplementation` since you're not forced to use those contracts.
+
+
+[07/17/2022 3:00 AM] 100proof
+I'm just trying to get my head around how all the jigsaw pieces fit together.
+
+
+[07/17/2022 3:02 AM] 100proof
+From here https://docs.ens.domains/contract-developer-guide/writing-a-registrar we learn that somehow you could take back ownership of their names. What exactly is the mechanism?
+
+{Attachments}
+Code4rena - ARCHIVE-Q3-2022 - ens-jul12 [996464935020277801].txt_Files/unknown-C69D4.png
+
+
+[07/17/2022 3:04 AM] premm.eth
+setSubnodeOwner : https://github.com/code-423n4/2022-07-ens/blob/main/contracts/registry/ENSRegistry.sol
+
+{Embed}
+https://github.com/code-423n4/2022-07-ens/blob/main/contracts/registry/ENSRegistry.sol
+2022-07-ens/ENSRegistry.sol at main · code-423n4/2022-07-ens
+Contribute to code-423n4/2022-07-ens development by creating an account on GitHub.
+Code4rena - ARCHIVE-Q3-2022 - ens-jul12 [996464935020277801].txt_Files/97ce107b-90e6-49b8-b893-ad2ce77d05d2-0F162
+
+
+[07/17/2022 3:04 AM] 100proof
+Yes, that's got to be it! Thanks.
+
+
+[07/17/2022 3:09 AM] premm.eth
+No problem, it can be hard to see what is going on because of all the connected contracts, but the base is the registry which is pretty simple.
+
+
+[07/17/2022 9:41 AM] scaraven
+If I understand correctly, for 2nd level domains on .eth the owner will be BaseRegistrarImplementation.sol. A new user can register a 2ld domains using ETHRegistrarController but if they want their domain name to be represented as a `ERC1155` token then they can transfer ownership to Namewrapper and receive a token in return using `wrapETH2LD`?
+
+
+[07/17/2022 1:12 PM] jeff_lau
+Yes this will be the case. The NameWrapper will be deployed first. And all .eth names are able to migrate using wrapETH2LD. Once the new controller is deployed, the name will be automatically wrapped
+
+{Reactions}
+👍 
+
+[07/17/2022 2:32 PM] izhuer
+Hi, would you mind checking the DM? Sorry to bother if any.
+
+
+[07/17/2022 3:05 PM] jeff_lau
+Sorry i meant to say ‘as the owner of the name in the wrapper I need to approve the contract’.
+
+
+[07/17/2022 4:25 PM] scaraven
+@Jeff Lau sent friend request so I can DM
+
+
+[07/17/2022 7:04 PM] panprog
+@Jeff Lau sent friend request to DM as well
+
+
+[07/18/2022 2:21 AM] 100proof
+Hey, I was wondering if we could get some feedback from C4 staff/sponsors about how to classify any bugs we find. User funds aren't a huge part of this particular project. Most of the potential attacks are about stealing domains or making them unusable, etc. How exactly should we go about classifying any exploits we might find? I only say this because High is usually associated with stealing/locking-up funds.
+
+{Reactions}
+👍 (3) 
+
+[07/18/2022 3:32 AM] 100proof
+@Jeff Lau Friend request sent for DM
+
+
+[07/18/2022 6:05 AM] nickjohnson
+I would suggest that anything that allows someone to take control of someone else's name, or makes it unusable, would qualify
+
+
+[07/18/2022 6:56 AM] 100proof
+And what about being able to get around fuse restrictions? Medium? High?
+
+
+[07/18/2022 8:55 AM] nickjohnson
+Depends on the impact. If the owner of a parent domain can get around fuse restrictions preventing them from controlling a subdomain, definitely high
+
+
+[07/18/2022 10:18 AM] panprog
+@nickjohnson friend request sent to DM, can you accept? thanks
+
+
+[07/18/2022 3:19 PM] benbaessler
+Is `anchors` defined in another file because it is not in `DNSSECImpl.sol`? https://github.com/code-423n4/2022-07-ens/blob/main/contracts/dnssec-oracle/DNSSECImpl.sol#L49
+
+{Embed}
+https://github.com/code-423n4/2022-07-ens/blob/main/contracts/dnssec-oracle/DNSSECImpl.sol
+2022-07-ens/DNSSECImpl.sol at main · code-423n4/2022-07-ens
+Contribute to code-423n4/2022-07-ens development by creating an account on GitHub.
+Code4rena - ARCHIVE-Q3-2022 - ens-jul12 [996464935020277801].txt_Files/97ce107b-90e6-49b8-b893-ad2ce77d05d2-0F162
+
+
+[07/18/2022 3:41 PM] gogotheauditor
+Yes, it is declared in DNSSEC.sol
+
+
+[07/18/2022 3:50 PM] benbaessler
+yeah I saw that later, thanks!
+
+
+[07/18/2022 4:29 PM] philogy
+How is SHA1 planned to be used? Isn't it already deprecated in pretty much all browsers?
+
+
+[07/18/2022 4:53 PM] 100proof
+I think it's part of DNSSEC still
+
+
+[07/18/2022 6:26 PM] nickjohnson
+Yes, it's required by some dnssec schemes
+
+
+[07/18/2022 9:12 PM] rustyrabbit
+How is the DNSSEC oracle actually used? I can't find any contract that actually calls verifyRRSet()
+
+
+[07/19/2022 2:02 AM] ak19966
+@nickjohnson ... Can I DM you ?
+
+
+[07/19/2022 3:20 AM] nickjohnson
+Of course
+
+
+[07/19/2022 3:21 AM] nickjohnson
+By the DNSRegistrar, which is out of scope for this audit
+
+
+[07/19/2022 3:38 AM] ak19966
+Sent to you message.. waiting for reply
+
+
+[07/19/2022 11:01 AM] philogy
+Is there a specific reason the ERC1155 standard is used over ERC721 to represent fuse domain tokens?
+
+{Reactions}
+👍 
+
+[07/19/2022 11:39 AM] rustyrabbit
+Anyone know how you create a  RRSetWithSignature from a dnsquery ?
+
+
+[07/19/2022 5:40 PM] czar102
+There is a function called `compareNames` in `dnssec-oracle/RRUtils.sol`. I the previous version of the DNSSEC oracle (<https://github.com/ensdomains/ens-contracts>) it was used in `dnssec-oracle/DNSSECImpl.sol`, but in the repo on C4's github it doesn't seem to be used anywhere. Is this function needed?
+
+
+[07/19/2022 7:00 PM] nickjohnson
+It's more gas-efficient.
+
+
+[07/19/2022 7:01 PM] nickjohnson
+See https://github.com/ensdomains/dnssecoraclejs
+
+{Embed}
+https://github.com/ensdomains/dnssecoraclejs
+GitHub - ensdomains/dnssecoraclejs: TypeScript/JavaScript library f...
+TypeScript/JavaScript library for generating DNSSEC proofs for the ENS DNSSEC oracle contract - GitHub - ensdomains/dnssecoraclejs: TypeScript/JavaScript library for generating DNSSEC proofs for th...
+Code4rena - ARCHIVE-Q3-2022 - ens-jul12 [996464935020277801].txt_Files/dnssecoraclejs-B16D2
+
+
+[07/19/2022 7:01 PM] nickjohnson
+Not any longer, no
+
+
+[07/19/2022 7:01 PM] nickjohnson
+It was used for negative proofs, but support for those has been removed
+
+
+[07/19/2022 7:01 PM] philogy
+In what way? Isn't unnecessary gas being spent on unused calldata due to token balances being limited to 0/1?
+
+
+[07/19/2022 7:02 PM] nickjohnson
+Calldata is cheap, but a compliant 1155 implementation can use only a single storage slot update, while 721 requires every mint and transfer to update the `balanceOf` mapping.
+
+
+[07/19/2022 7:04 PM] philogy
+Oh that's what you mean, yeah good point.
+
+
+[07/19/2022 8:02 PM] C4
+**🚨 CONTEST ALERT**
+
+@🐺wardens The **ENS** contest is now closed! Huge thanks to everyone who participated 🔍, whether you submitted a finding or not.
+
+What's next: the **ENS** team will review the findings over the next couple of days, and then we'll pass them off to the judge. Keep an eye on #📢announcements for regular updates on how the contest is progressing through awarding 🤑🏆, judging 🧑‍⚖️ and reporting 📜. Feel free to ping a gardener if you have questions along the way!
+
+{Reactions}
+❤️ (13) 
+
+[07/20/2022 1:20 AM] CRYP70#8985
+Thanks to the devs!
+
+{Reactions}
+❤️ 
+
+[08/05/2022 11:39 AM] lsdan
+Whoever is PwnedNoMore, please DM me about your issue labeled PNM-004.
+
+
+[08/05/2022 11:41 AM] lsdan
+@Jeff Lau please also DM me about this issue or accept my friend request. I can't message you due to your settings.
+
+
+[09/09/2022 3:13 PM] rohan16
+When is this going to come
+
+{Reactions}
+☝️ (2) 
+
+[09/09/2022 3:13 PM] rohan16
+??
+
+
+[09/12/2022 9:34 AM] ajtra#5030
+any update???
+
+{Reactions}
+👍 ☝️ 
+
+[09/13/2022 7:06 PM] ajtra#5030
+two months since the contest finished. Could we have any update please?
+
+
+[09/13/2022 8:02 PM] thepicodes
+It's still in the judging phase according to the last announcement https://discord.com/channels/810916927919620096/810929015509483554/1018978942809555045
+
+{Reactions}
+😢 
+
+[09/16/2022 7:46 PM] ajtra#5030
+there is a significant delay in the judging of this contest. Any problem?
+
+{Reactions}
+☝️ (8) 
+
+[09/29/2022 10:03 AM] road220
+btw, what is happening with this contest? :)) Still in judging
+
+{Reactions}
+☝️ 
+
+[10/09/2022 5:06 PM] philogy
+approaching 3 months since closing 👀
+
+
+[10/13/2022 1:01 AM] yongkiws
+3 months no news?
+
+
+[10/13/2022 1:50 AM] chainNue#2511
+rather than checking and asking, l suggest for a better information flow thru adding new feature, please thumb this up https://discord.com/channels/810916927919620096/824698635815223316/1029661743221329952
+
+
+[10/17/2022 4:55 AM] rokinot
+https://github.com/code-423n4/code423n4.com/pull/4440
+
+{Embed}
+https://github.com/code-423n4/code423n4.com/pull/4440
+Add ENS to Leaderboard by liveactionllama · Pull Request #4440 · co...
+Code4rena - ARCHIVE-Q3-2022 - ens-jul12 [996464935020277801].txt_Files/4440-C3443
+
+{Reactions}
+👍 (4) 
+
+[10/17/2022 1:27 PM] itsmetechjay
+🤑 🎉 Awards for **ENS**:
+
+$18,700.42 USDC » PwnedNoMore (@izhuer, @ItsNio, @papr1ka2)
+$11,088.16 USDC » @zzzitron 
+$8,671.28 USDC » @panprog 
+$4,497.98 USDC » GimelSec (@rayn | GimelSec, @sces60107 | GimelSec)
+$3,471.22 USDC » @0x52 
+$2,588.30 USDC » @Alan724 
+$2,583.61 USDC » @csanuragjain 
+$1,709.39 USDC » @0x1f8b 
+$1,594.23 USDC » @wastewa 
+$1,263.53 USDC » Aussie_Battlers (@100proof, @thinklab)
+$1,258.68 USDC » @brgltd 
+$1,223.06 USDC » @cryptphi 
+$1,138.73 USDC » @peritoflores 
+$1,108.71 USDC » @cccz 
+$1,056.57 USDC » @Roman 
+$936.66 USDC » @IllIllI 
+$562.85 USDC » @Dravee 
+$534.37 USDC » @bin2chen 
+$526.34 USDC » 0x29A (@Rotcivegaf, @anon)
+$460.94 USDC » @Limbooo 
+$455.49 USDC » @ronnyx2017 | Offside Labs 
+$412.06 USDC » @joestakey 
+$405.26 USDC » @rbserver 
+$390.12 USDC » @0xKitsune 
+$308.93 USDC » @benbaessler 
+$293.90 USDC » @Sm4rty 
+$250.36 USDC » @Bernd 
+$222.29 USDC » @Bnke 
+$222.29 USDC » @Deivitto 
+$215.78 USDC » @RedOneN 
+$205.88 USDC » @CRYP70 
+$197.30 USDC » @gogo 
+$171.48 USDC » @Amithuddar 
+$164.60 USDC » @hake | SmartSek 
+$160.84 USDC » @TomJ 
+$147.90 USDC » @MiloTruck 
+$142.91 USDC » @Rolezn 
+$129.24 USDC » @c3phas 
+$128.88 USDC » @Ruhum 
+$125.39 USDC » @Ch_301 
+$124.90 USDC » @_Adam 
+$124.79 USDC » @hyh 
+$124.78 USDC » @__141345__ 
+$124.30 USDC » @Sloth 
+$124.30 USDC » @fatherOfBlocks 
+$124.26 USDC » @0xNineDec 
+$124.19 USDC » @rajatbeladiya 
+$123.53 USDC » @0xNazgul 
+$123.44 USDC » @robee 
+$123.43 USDC » @sashik_eth 
+$123.43 USDC » @Funen 
+$123.24 USDC » @kyteg 
+$119.45 USDC » @Waze 
+$119.40 USDC » @JC
+$119.40 USDC » @JohnSmith 
+$119.35 USDC » @Rohan 
+$119.34 USDC » @bulej93 
+$119.34 USDC » @cRat1st0s 
+$118.90 USDC » @rokinot 
+$118.85 USDC » @delfin454000 
+$118.79 USDC » @8olidity 
+$118.75 USDC » @sach1r0 
+$118.74 USDC » @ReyAdmirado 
+$118.73 USDC » @zuhaibmohd 
+$118.73 USDC » @LCFR 
+$118.73 USDC » @simon135 
+$118.73 USDC » @seyni 
+$118.73 USDC » @cryptonue 
+$118.73 USDC » @ElKu 
+$103.04 USDC » @dxdv 
+$84.32 USDC » @pashov 
+$83.57 USDC » 0xf15ers (@remora0, @twojoy)
+$79.48 USDC » @p_crypt0 
+$78.88 USDC » @Critical 
+$78.88 USDC » @pedr02b2 
+$78.88 USDC » @Philogy 
+$78.87 USDC » @Django | Saloon Finance 
+$78.87 USDC » @rishabh 
+$78.87 USDC » @svskaushik 
+$78.87 USDC » @RustyRabbit 
+$78.87 USDC » @minhtrng 
+$78.87 USDC » @PENGUN 
+$78.74 USDC » @m_Rassska
+
+{Reactions}
+💸 (7) 
+
+[10/17/2022 1:27 PM] itsmetechjay
+$45.91 USDC » @durianSausage 
+$44.30 USDC » @ajtra 
+$44.30 USDC » @Tomio 
+$39.87 USDC » @0X040 
+$39.87 USDC » @0xsam 
+$39.87 USDC » @code-cipher 
+$39.87 USDC » @Fitraldys 
+$39.87 USDC » @lucacez 
+$39.87 USDC » @Noah3o6 
+$39.87 USDC » @samruna 
+$39.86 USDC » @arcoun 
+$39.86 USDC » @karanctf 
+$39.86 USDC » @Sahar 
+$39.86 USDC » @ak1 
+$39.86 USDC » @Chom 
+$5.45 USDC » @++Jujic#5558 
+$5.45 USDC » @scaraven 
+
+🏁 Findings summary
+---------------------------
+High risk findings: 10 total, 3 unique
+Med risk findings: 62 total, 13 unique
+Gas optimization reports: 70
+QA reports: 71
+
+Awards will be distributed on Polygon within the next 1-2 weeks. Congratulations! 💸 💸
+
+*Note: If you participated in this contest and don’t see your name on this list, please wait until the report is published and the findings repo is made public to check on your submissions.*
+
+{Reactions}
+🎉 (9) C4Keycap (6) 
+
+[10/17/2022 2:17 PM] Amithuddar#9571
+🎉👏
+
+
+[10/17/2022 3:53 PM] bnke0x0
+https://tenor.com/view/hasbulla-money-gif-25191018
+
+{Embed}
+https://tenor.com/view/hasbulla-money-gif-25191018
+Code4rena - ARCHIVE-Q3-2022 - ens-jul12 [996464935020277801].txt_Files/hasbulla-money-655AB.png
+
+
+[10/17/2022 6:12 PM] Albani#0298
+How to get join sir
+
+
+[11/08/2022 7:09 PM] rustyrabbit
+When will the report be available ?
+
+
+==============================================================
+Exported 131 message(s)
+==============================================================
